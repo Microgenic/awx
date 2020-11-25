@@ -1,0 +1,15 @@
+---
+- name: Clean VMB's workspace
+  hosts: vmb
+  become: true
+  become_user: root
+  
+  tasks:
+    - name: Delete workspace
+      msg: "test1"
+      shell: rm -r ~/agent/workspace/*
+
+  tasks:
+    - name: Cleanup docker
+      msg: "test2"
+      shell: docker system prune -a -f
