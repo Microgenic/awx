@@ -4,21 +4,19 @@
   become: true
   become_user: root
 
-# shell approach  
   tasks:
     - name: Delete workspace
-      #shell: rm -rf ~/agent/workspace/*
       file:
         state: absent
         path: ~/agent/workspace/
-
+      #shell: rm -rf ~/agent/workspace/*
   tasks:
     - name: Cleanup docker
-      #shell: docker system prune -a -f
+      shell: docker system prune -a -f
       #community.general.docker_prune: v2.10
-      docker_prune:
-        containers: no
-        images: yes
-        networks: no
-        volumes: no
-        builder_cache: no
+      #docker_prune:
+       # containers: no
+        #images: yes
+        #networks: no
+        #volumes: no
+        #builder_cache: no
