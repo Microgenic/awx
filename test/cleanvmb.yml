@@ -6,7 +6,7 @@
   
   tasks:
     - name: Delete workspace
-      shell: rm -r ~/agent/workspace/*
+      shell: rm -rf ~/agent/workspace/*
 
   tasks:
     - name: Cleanup docker
