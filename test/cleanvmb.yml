@@ -3,10 +3,19 @@
   hosts: vmb
   become: true
   become_user: root
-
   tasks:
     - name: Delete workspace
-      shell: rm -rf ~/agent/workspace/*
+      find:
+        paths: ~/agent/workspace
+        recurse: no
+        file_type: directory
+      register: folders_to_delete
+      
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ folders_to_delete.files }}"
+      #shell: rm -rf ~/agent/workspace/*
 
     - name: Cleanup docker
       shell: docker system prune -a -f
