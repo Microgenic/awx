@@ -6,7 +6,7 @@
   tasks:
     - name: Delete workspace
       find:
-        paths: ~/agent/workspace
+        paths: agent/workspace
         recurse: no
         file_type: directory
       register: folders_to_delete
