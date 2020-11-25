@@ -10,11 +10,12 @@
         recurse: no
         file_type: directory
       register: folders_to_delete
-      
+    
+    - name: Delete workspace  
       file:
         path: "{{ item.path }}"
         state: absent
-      with_items: "{{ folders_to_delete.files }}"
+      with_items: "{{ folders_to_deletecd...files }}"
       #shell: rm -rf ~/agent/workspace/*
 
     - name: Cleanup docker
