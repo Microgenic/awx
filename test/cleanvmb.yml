@@ -4,14 +4,14 @@
   become: true
   become_user: root
   tasks:
-    - name: Delete workspace
+    - name: Find folders in workspace to delete
       find:
         paths: agent/workspace
         recurse: no
         file_type: directory
       register: folders_to_delete
     
-    - name: Delete workspace  
+    - name: Delete folders  
       file:
         path: "{{ item.path }}"
         state: absent
