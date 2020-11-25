@@ -15,7 +15,7 @@
       file:
         path: "{{ item.path }}"
         state: absent
-      with_items: "{{ folders_to_deletecd...files }}"
+      with_items: "{{ folders_to_delete.files }}"
       #shell: rm -rf ~/agent/workspace/*
 
     - name: Cleanup docker
