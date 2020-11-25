@@ -15,7 +15,8 @@
   tasks:
     - name: Cleanup docker
       #shell: docker system prune -a -f
-      community.general.docker_prune:
+      #community.general.docker_prune: v2.10
+      docker_prune:
         containers: no
         images: yes
         networks: no
