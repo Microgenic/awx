@@ -3,7 +3,7 @@
   hosts: 192.168.0.161
   become: yes
 #  become_method: su
-#  become_user: root
+  become_user: root
   become_flags: '-s /bin/sh'
   tasks:   
     - name: who am i?
