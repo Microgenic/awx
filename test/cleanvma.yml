@@ -24,3 +24,9 @@
         excludes: 'master'
       register: folders_branch
       with_items: "{{ folders_repo.files }}"
+
+    - name: Delete folders  
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ folders_branch.files }}"
