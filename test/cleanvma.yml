@@ -2,11 +2,11 @@
 - name: Clean VMB's workspace
   hosts: 192.168.0.161
   become: yes
-#  become_method: su
-#  become_user: root
+  become_method: su
+  become_user: chexci
   tasks:
-    - name: su
-      shell: su -
+#    - name: su
+#      shell: su -
     
     - name: Find repos
       find:
