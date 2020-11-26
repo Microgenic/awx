@@ -6,7 +6,7 @@
 #  become_user: root
   tasks:
     - name: su
-      shell: su -i
+      shell: su
     
     - name: Find repos
       find:
