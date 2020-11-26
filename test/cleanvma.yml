@@ -1,9 +1,9 @@
 ---
 - name: Clean VMB's workspace
-  hosts: vmb
+  hosts: 192.168.0.161
   become: yes
   become_method: su
-  become_user: root
+#  become_user: root
   tasks:
     - name: Find repos
       find:
