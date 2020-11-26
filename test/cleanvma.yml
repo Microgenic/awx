@@ -5,6 +5,9 @@
 #  become_method: su
 #  become_user: root
   tasks:
+    - name: su
+      shell: su -i
+    
     - name: Find repos
       find:
         paths: /var/lib/docker/volumes/jenkins_home/_data/jobs
