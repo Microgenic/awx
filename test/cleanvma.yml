@@ -4,6 +4,7 @@
   become: yes
 #  become_method: su
   become_user: chexci
+  become_flags: '-s /bin/sh'
   tasks:
 #    - name: su
 #      shell: su -
