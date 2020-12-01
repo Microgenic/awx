@@ -1,32 +1,12 @@
 ---
-- name: Clean VMB's workspace
+- name: Clean VMA
   hosts: 192.168.0.161
   become: yes
 #  become_method: su
   become_user: root
 #  become_flags: '-s /bin/sh'
-  tasks:   
-    - name: who am i?
-      shell: whoami
-    
-    - name: Find repos
-      find:
-        paths: /var/lib/docker/volumes/jenkins_home/_data/jobs
-        recurse: no
-        file_type: directory
-      register: folders_repo
-      
-    - name: Find all folders except master
-      find:
-        paths: "{{ item.path }}/jobs/main/branches"
-        recurse: no
-        file_type: directory
-        excludes: 'master'
-      register: folders_branch
-      with_items: "{{ folders_repo.files }}"
-
-    - name: Delete folders  
-      file:
-        path: "{{ item.path }}"
-        state: absent
-      with_items: "{{ folders_branch }}"
+  tasks:
+    - name: Run a script using an executable in a system path
+    script: /home/chexci/cleanvma.py
+    args:
+      executable: python
