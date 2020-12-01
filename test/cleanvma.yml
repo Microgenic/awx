@@ -7,6 +7,6 @@
 #  become_flags: '-s /bin/sh'
   tasks:
     - name: Run a script using an executable in a system path
-    script: /home/chexci/cleanvma.py
-    args:
-      executable: python
+      script: /home/chexci/cleanvma.py
+      args:
+        executable: python
