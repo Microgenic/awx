@@ -1,38 +1,36 @@
 import os
 import shutil
 
-# Directory to be scanned
+# Start directory to be scanned
 path = '/var/lib/docker/volumes/jenkins_home/_data/jobs'
+combinepath = ''
 threshold = 0
-# Scan the directiory and get
-# an iterator of os.DirEntry objets
-# corresponding to entries in it
-# using os.scandir() method
-obj = os.scandir(path)
 
 # List all files and diretories
 # in the specified path
 print("Files and Directories in '% s':" % path)
 try:
-   for entry in obj :
-     if entry.is_dir(follow_symlinks=False):
-       if os.path.exists(entry.path + '/jobs/main/branches'):
-         for xxx in os.scandir(entry.path + '/jobs/main/branches') :
-           if xxx.is_dir(follow_symlinks=False) and xxx.name != 'master':
-             shutil.rmtree(xxx.path)
-             #print(xxx.path)
-             #print("ende1")
-       if os.path.exists(entry.path + '/jobs/main/branches/master/builds'):
-         #print("pfad da")
-         with open(entry.path + '/jobs/main/branches/master/nextBuildNumber') as f:
-           threshold = int(f.read())-5
-           #print(threshold)
-         for xxx in os.scandir(entry.path + '/jobs/main/branches/master/builds') :
-           #print(xxx.name)
-           if xxx.is_dir(follow_symlinks=False) and xxx.name.isnumeric():
-             if int(xxx.name) < threshold:
-               shutil.rmtree(xxx.path)
-               #print(xxx.path)
-
-finally:
-  obj.close()
+  with os.scandir(path) as dirs1:
+    for dir1 in dirs1 :
+      if dir1.is_dir(follow_symlinks=False):
+        combinepath = dir1.path + '/jobs/main/branches'
+        if os.path.exists(combinepath):
+          with os.scandir(combinepath) as dirs2:
+            for dir2 in dirs2:
+              if dir2.is_dir(follow_symlinks=False) and dir2.name != 'master':
+                shutil.rmtree(dir2.path)
+                #print(dir2.path)
+                #print("ende1")
+        combinepath = dir1.path + '/jobs/main/branches/master/builds'
+        if os.path.exists(combinepath):
+          #print("pfad da")
+          with open(dir1.path + '/jobs/main/branches/master/nextBuildNumber') as f:
+            threshold = int(f.read())-5
+            #print(threshold)
+          with os.scandir(combinepath) as dirs3:
+            for dir3 in os.scandir(combinepath):
+              #print(dir3.name)
+              if dir3.is_dir(follow_symlinks=False) and dir3.name.isnumeric():
+                if int(dir3.name) < threshold:
+                  shutil.rmtree(dir3.path)
+                  #print(dir3.path)
