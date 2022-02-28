@@ -1,14 +1,15 @@
 import os
 import shutil
 
-# Start directory to be scanned
-path = '/var/lib/docker/volumes/jenkins_home/_data/jobs'
-combinepath = ''
-threshold = 0
-
 # Delete all files in /home/chexci/services/nginx/http-storage/__cache__ once
 print("Files and Directories in /home/chexci/services/nginx/http-storage/__cache__")
 #shell: rm -rf /home/chexci/services/nginx/http-storage/__cache__/*
+
+# Start directory to be scanned
+#path = '/var/lib/docker/volumes/jenkins_home/_data/jobs'
+path = '/var/lib/docker/volumes/jenkins/_data/jobs'
+combinepath = ''
+threshold = 0
 
 # List all files and diretories
 # in the specified path
