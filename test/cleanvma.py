@@ -39,3 +39,5 @@ try:
                 if int(dir3.name) < threshold:
                   shutil.rmtree(dir3.path)
                   #print(dir3.path)
+except:
+  print("Something went wrong")
