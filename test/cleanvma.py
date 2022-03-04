@@ -6,6 +6,14 @@
 import os
 import shutil
 
+#NGINX path
+nginxpath = '/home/chexci/services/nginx/http-storage/__cache__'
+
+if os.path.exists(nginxpath):
+  print("Delete files in '% s':" % nginxpath)
+  for file in os.os.listdir(nginxpath):
+    os.remove(file)
+
 # Directory to be scanned
 path = '/var/lib/docker/volumes/jenkins/_data/jobs'
 threshold = 0
