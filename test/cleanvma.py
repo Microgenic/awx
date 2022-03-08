@@ -1,18 +1,14 @@
-
-# This file must be copied into docker container where ansible is running
-# path is /home
-# sudo docker cp cleanvma.py 4ce51e72ed76:/home/cleanvma.py
-
 import os
 import shutil
+# This file must be copied into docker container where ansible is running path is /home
+# sudo docker cp cleanvma.py 4ce51e72ed76:/home/cleanvma.py
 
 #NGINX path
-nginxpath = '/home/chexci/services/nginx/http-storage/__cache__'
+nginxpath = '/home/chexci/services/nginx/storage/__cache__'
 
 if os.path.exists(nginxpath):
-  print("Delete files in '% s':" % nginxpath)
-  for file in os.os.listdir(nginxpath):
-    os.remove(file)
+  print("Delete folder '% s':" % nginxpath)
+  shutil.rmtree(nginxpath)
 
 # Directory to be scanned
 path = '/var/lib/docker/volumes/jenkins/_data/jobs'
