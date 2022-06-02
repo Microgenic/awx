@@ -26,22 +26,28 @@ try:
    for entry in obj :
      if entry.is_dir(follow_symlinks=False):
        if os.path.exists(entry.path + '/jobs/main/branches'):
-         for xxx in os.scandir(entry.path + '/jobs/main/branches') :
-           if xxx.is_dir(follow_symlinks=False) and xxx.name != 'master':
-             shutil.rmtree(xxx.path)
-             #print(xxx.path)
-             #print("ende1")
+         for fold1 in os.scandir(entry.path + '/jobs/main/branches') :
+           if fold1.is_dir(follow_symlinks=False) and fold1.name != 'master' and os.path.exists(fold1.path + '/nextBuildNumber'):
+             with open(fold1.path + '/nextBuildNumber') as f:
+               threshold = int(f.read())-2
+               print(fold1.path)
+               print(threshold)
+             for fold2 in os.scandir(fold1.path + '/builds') :
+               if fold2.is_dir(follow_symlinks=False) and fold2.name.isnumeric():
+                 if int(fold2.name) < threshold:
+                   #shutil.rmtree(fold2.path)
+                   print(fold2.path)
        if os.path.exists(entry.path + '/jobs/main/branches/master/builds'):
          #print("pfad da")
          with open(entry.path + '/jobs/main/branches/master/nextBuildNumber') as f:
            threshold = int(f.read())-5
            #print(threshold)
-         for xxx in os.scandir(entry.path + '/jobs/main/branches/master/builds') :
-           #print(xxx.name)
-           if xxx.is_dir(follow_symlinks=False) and xxx.name.isnumeric():
-             if int(xxx.name) < threshold:
-               shutil.rmtree(xxx.path)
-               #print(xxx.path)
+         for fold1 in os.scandir(entry.path + '/jobs/main/branches/master/builds') :
+           #print(fold1.name)
+           if fold1.is_dir(follow_symlinks=False) and fold1.name.isnumeric():
+             if int(fold1.name) < threshold:
+               #shutil.rmtree(fold1.path)
+               print(fold1.path)
 
 finally:
   obj.close()
